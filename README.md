@@ -92,10 +92,10 @@ To get a local copy up and running follow these simple example steps.
         },
         {
             "apiEndpoint": "top100/best",
-        	"playlistId": "7HFsBrU0qHivmXzGLQJI4d",
+            "playlistId": "7HFsBrU0qHivmXzGLQJI4d",
             "scope": "playlist-modify-public"
-     	}
-   	]
+         }
+    ]
    }
    ```
 6. Run main.py
