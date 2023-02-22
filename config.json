@@ -1,0 +1,16 @@
+{
+    "redirectURI": "http://localhost:8080/callback",
+    "username": "yap8b0pkw7hdeqbfydk2cyj0a",
+    "playlists": [
+        {
+            "apiEndpoint": "top100",
+            "playlistId": "5GUwELpSDAMqIEqfdJmozJ",
+            "scope": "playlist-modify-public"
+        },
+        {
+            "apiEndpoint": "top100/best",
+            "playlistId": "7HFsBrU0qHivmXzGLQJI4d",
+            "scope": "playlist-modify-public"
+        }
+    ]
+}
