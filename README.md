@@ -82,20 +82,20 @@ To get a local copy up and running follow these simple example steps.
 5. Edit config.json to your liking
    ```sh
    {
-    "redirectURI": "http://localhost:8080/callback", # Obtained from https://developer.spotify.com/dashboard/applications
-    "username": "yap8b0pkw7hdeqbfydk2cyj0a", # Obtained from https://www.spotify.com/us/account/overview
-    "playlists": [
-        {
-            "apiEndpoint": "top100", # Obtained from back-half of HNHH URL (Ex: https://www.hotnewhiphop.com/top100)
-            "playlistId": "5GUwELpSDAMqIEqfdJmozJ", # Obtained from back-half of playlist URL (Ex: https://open.spotify.com/playlist/5GUwELpSDAMqIEqfdJmozJ)
-            "scope": "playlist-modify-public" # Authorization scope for modifying the aforementioned playlistId (playlist-modify-public or playlist-modify-private)
-        },
-        {
-            "apiEndpoint": "top100/best",
-            "playlistId": "7HFsBrU0qHivmXzGLQJI4d",
-            "scope": "playlist-modify-public"
-         }
-    ]
+       "redirectURI": "http://localhost:8080/callback", # Obtained from https://developer.spotify.com/dashboard/applications
+       "username": "yap8b0pkw7hdeqbfydk2cyj0a", # Obtained from https://www.spotify.com/us/account/overview
+       "playlists": [
+           {
+               "apiEndpoint": "top100", # Obtained from back-half of HNHH URL (Ex: https://www.hotnewhiphop.com/top100)
+               "playlistId": "5GUwELpSDAMqIEqfdJmozJ", # Obtained from back-half of playlist URL (Ex: https://open.spotify.com/playlist/5GUwELpSDAMqIEqfdJmozJ)
+               "scope": "playlist-modify-public" # Authorization scope for modifying the aforementioned playlistId (playlist-modify-public or playlist-modify-private)
+           },
+           {
+               "apiEndpoint": "top100/best",
+               "playlistId": "7HFsBrU0qHivmXzGLQJI4d",
+               "scope": "playlist-modify-public"
+           }
+       ]
    }
    ```
 6. Run main.py
