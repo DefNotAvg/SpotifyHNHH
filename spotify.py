@@ -23,7 +23,7 @@ class Spotify:
 		'''
 		results = self.spotify.search('track:' + query, limit=10, offset=0, type='track', market=None)['tracks']['items']
 		if results:
-			filtered_results = [song for song in results if any(item.strip() == song['artists'][0]['name'].lower() for item in main_artist.lower().split(','))]
+			filtered_results = [song for song in results if song and any(item.strip() == song['artists'][0]['name'].lower() for item in main_artist.lower().split(','))]
 			if filtered_results:
 				if any(item['explicit'] for item in filtered_results):
 					return [item for item in filtered_results if item['explicit']][0]['uri'].split(':')[2]
