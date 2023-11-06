@@ -5,9 +5,13 @@ from spotify import Spotify
 
 if __name__ == '__main__':
 	header()
+	config = load_from_json('config.json')
+	os.environ['SPOTIPY_REDIRECT_URI'] = config['redirectURI']
+	if not os.getenv('SPOTIPY_CLIENT_ID') or not os.getenv('SPOTIPY_CLIENT_SECRET'):
+		environ = load_from_json(config['environmentVariables'])
+		os.environ['SPOTIPY_CLIENT_ID'] = environ['SPOTIPY_CLIENT_ID']
+		os.environ['SPOTIPY_CLIENT_SECRET'] = environ['SPOTIPY_CLIENT_SECRET']
 	if os.getenv('SPOTIPY_CLIENT_ID') and os.getenv('SPOTIPY_CLIENT_SECRET'):
-		config = load_from_json('config.json')
-		os.environ['SPOTIPY_REDIRECT_URI'] = config['redirectURI']
 		while True:
 			for playlist in config['playlists']:
 				print('{}\r'.format(center('[{}] Gathering songs for {} playlist...'.format(smart_time(), playlist['apiEndpoint']), display=False)), end='')

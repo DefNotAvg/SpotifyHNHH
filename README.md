@@ -82,6 +82,7 @@ To get a local copy up and running follow these simple example steps.
 5. Edit config.json to your liking
    ```sh
    {
+       "environmentVariables": "..\\Credentials\\credentials.json", # File where sensitive environment variables are stored
        "redirectURI": "http://localhost:8080/callback", # Obtained from https://developer.spotify.com/dashboard/applications
        "username": "yap8b0pkw7hdeqbfydk2cyj0a", # Obtained from https://www.spotify.com/us/account/overview
        "playlists": [
