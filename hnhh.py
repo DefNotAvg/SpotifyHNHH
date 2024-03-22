@@ -17,43 +17,29 @@ class HNHH:
 		self.build_id = None # Set buildId to None initially
 		self.homepage = 'https://www.hotnewhiphop.com/'
 		self.session = requests.Session()
-		self.build_id = self.get_build_id() # Get buildId after session has been initiated
-		self.next_data = '{}_next/data/{}/{}.json'.format(self.homepage, self.build_id, self.api_endpoint) # Set next data URL after buildId has been obtained
-
-	def get_build_id(self):
-		'''Obtains buildId from HNHH source code.
-
-		Returns:
-			BuildId string.
-		'''
-		if self.build_id:
-			return self.build_id
-		else:
-			response = self.session.get(self.homepage + self.api_endpoint)
-			soup = BeautifulSoup(response.content, 'html.parser')
-			next_data = [item.text for item in soup.find_all('script') if item.get('id') == '__NEXT_DATA__'][0]
-			return json.loads(next_data)['buildId']
 
 	def get_songs(self):
-		'''Obtains songs from HNHH next data.
+		'''Obtains songs from HNHH source code.
 
 		Returns:
 			List of dictionaries containing a Spotify query and the main artist behind the song.
 		'''
-		response = self.session.get(self.next_data)
-		return [self.song_info(item['song']) for item in response.json()['pageProps']['data']]
+		response = self.session.get(self.homepage + self.api_endpoint)
+		soup = BeautifulSoup(response.content, 'html.parser')
+		songs = soup.find_all('div', class_='ml-4')
+		return [self.song_info(song) for song in songs]
 
 	def song_info(self, song):
-		'''Obtains relevant info from a single song's next data.
+		'''Obtains relevant info from a single song's HTML.
 
 		Args:
-			song: Next data song dictionary.
+			song: Song HTML.
 
 		Returns:
 			Dictionary containing a Spotify query and the main artist behind the song.
 		'''
-		song_name = html.unescape(song['songName'])
-		artists = [html.unescape(item['name']) for item in song['artistTags']['nodes']]
+		song_name = html.unescape(song.find('h2').get_text())
+		artists = ''.join([html.unescape(item.get_text()).strip() for item in song.find_all('a', class_='mr-1')]).split(',')
 		main_artist = artists[0]
 		query = '{} {}'.format(song_name, ' '.join(artists))
 		return {
