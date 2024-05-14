@@ -2,9 +2,10 @@ import html
 import json
 import requests
 from bs4 import BeautifulSoup
+from helpers import load_from_json
 
 class HNHH:
-	def __init__(self, api_endpoint):
+	def __init__(self, api_endpoint, artist_replacements):
 		'''Initialize HNHH class with some attributes.
 
 		Attributes:
@@ -14,6 +15,7 @@ class HNHH:
 			session: Session used across all HTTP requests.
 		'''
 		self.api_endpoint = api_endpoint
+		self.artist_replacements = load_from_json(artist_replacements)
 		self.build_id = None # Set buildId to None initially
 		self.homepage = 'https://www.hotnewhiphop.com/'
 		self.session = requests.Session()
@@ -39,7 +41,8 @@ class HNHH:
 			Dictionary containing various information about a given song.
 		'''
 		song_name = html.unescape(song.find('h2').get_text())
-		artists = ''.join([html.unescape(item.get_text()).strip() for item in song.find_all('a', class_='mr-1')]).split(',')
+		raw_artists = ''.join([html.unescape(item.get_text()).strip() for item in song.find_all('a', class_='mr-1')]).split(',')
+		artists = [(self.artist_replacements[artist] if artist in self.artist_replacements.keys() else artist) for artist in raw_artists]
 		query = '{} {}'.format(song_name, ' '.join(artists))
 		return {
 			'artists': artists,

@@ -1,4 +1,5 @@
 {
+    "artistReplacements": "artistReplacements.json",
     "environmentVariables": "../Credentials/credentials.json",
     "redirectURI": "http://localhost:8080/callback",
     "username": "yap8b0pkw7hdeqbfydk2cyj0a",

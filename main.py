@@ -15,7 +15,7 @@ if __name__ == '__main__':
 		while True:
 			for playlist in config['playlists']:
 				print('{}\r'.format(center('[{}] Gathering songs for {} playlist...'.format(smart_time(), playlist['apiEndpoint']), display=False)), end='')
-				scraper = HNHH(playlist['apiEndpoint'])
+				scraper = HNHH(playlist['apiEndpoint'], config['artistReplacements'])
 				songs = scraper.get_songs()
 				sp = Spotify(config['username'], playlist['scope'])
 				print('{}\r'.format(center('[{}] Gathering track IDs for {} playlist...'.format(smart_time(), playlist['apiEndpoint']), display=False)), end='')
