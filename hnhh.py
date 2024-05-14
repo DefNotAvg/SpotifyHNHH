@@ -36,13 +36,13 @@ class HNHH:
 			song: Song HTML.
 
 		Returns:
-			Dictionary containing a Spotify query and the main artist behind the song.
+			Dictionary containing various information about a given song.
 		'''
 		song_name = html.unescape(song.find('h2').get_text())
 		artists = ''.join([html.unescape(item.get_text()).strip() for item in song.find_all('a', class_='mr-1')]).split(',')
-		main_artist = artists[0]
 		query = '{} {}'.format(song_name, ' '.join(artists))
 		return {
+			'artists': artists,
 			'query': query,
-			'mainArtist': main_artist
+			'songName': song_name
 		}

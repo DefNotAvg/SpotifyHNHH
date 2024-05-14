@@ -19,7 +19,7 @@ if __name__ == '__main__':
 				songs = scraper.get_songs()
 				sp = Spotify(config['username'], playlist['scope'])
 				print('{}\r'.format(center('[{}] Gathering track IDs for {} playlist...'.format(smart_time(), playlist['apiEndpoint']), display=False)), end='')
-				track_ids = [item for item in [sp.get_track_id(song['query'], song['mainArtist']) for song in songs] if item]
+				track_ids = [item for item in [sp.get_track_id(song) for song in songs] if item]
 				if track_ids:
 					sp.spotify.playlist_replace_items(playlist['playlistId'], track_ids)
 					center('[{}] Successfully updated {} playlist with {:,}/{:,} songs.'.format(smart_time(), playlist['apiEndpoint'], len(track_ids), len(songs)))
