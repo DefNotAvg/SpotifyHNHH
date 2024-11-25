@@ -20,7 +20,7 @@ class Spotify:
 		Returns:
 			URI string of the track.
 		'''
-		results = self.spotify.search('track:' + song['query'], limit=10, offset=0, type='track', market=None)['tracks']['items']
+		results = self.spotify.search(song['query'], limit=10, offset=0, type='track', market=None)['tracks']['items']
 		if results:
 			sorted_results = sorted(results, key=lambda item: len(set([artist.lower() for artist in song['artists']])&set([artist['name'].lower() for artist in item['artists']])), reverse=True) # Sort results by number of matched artists
 			filtered_results = [item for item in sorted_results if len(set([artist.lower() for artist in song['artists']])&set([artist['name'].lower() for artist in item['artists']])) > 0] # Remove tracks with no matched artists
